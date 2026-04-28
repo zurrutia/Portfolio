@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Zach Urrutia — IT Systems Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;1,9..144,300&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+–ink: #0f0f0e;
+–paper: #f5f3ef;
+–mid: #7a7670;
+–rule: #dedad4;
+–accent: #1a3a2a;
+–accent-light: #e8efe9;
+–mono: ‘DM Mono’, monospace;
+–serif: ‘Fraunces’, Georgia, serif;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+background: var(–paper);
+color: var(–ink);
+font-family: var(–mono);
+font-size: 14px;
+line-height: 1.7;
+-webkit-font-smoothing: antialiased;
+}
+
+/* –– HEADER –– */
+header {
+border-bottom: 1px solid var(–rule);
+padding: 64px 0 48px;
+opacity: 0;
+animation: fadeUp 0.7s ease forwards;
+}
+
+.container { max-width: 860px; margin: 0 auto; padding: 0 32px; }
+
+.eyebrow {
+font-family: var(–mono);
+font-size: 11px;
+letter-spacing: 0.15em;
+text-transform: uppercase;
+color: var(–mid);
+margin-bottom: 20px;
+}
+
+h1 {
+font-family: var(–serif);
+font-size: clamp(42px, 6vw, 68px);
+font-weight: 300;
+line-height: 1.05;
+letter-spacing: -0.02em;
+color: var(–ink);
+margin-bottom: 24px;
+}
+
+h1 em {
+font-style: italic;
+color: var(–accent);
+}
+
+.header-meta {
+display: flex;
+gap: 32px;
+flex-wrap: wrap;
+color: var(–mid);
+font-size: 12px;
+letter-spacing: 0.05em;
+margin-top: 32px;
+}
+
+.header-meta span::before {
+content: ’— ’;
+opacity: 0.4;
+}
+
+/* –– NAV –– */
+nav {
+position: sticky;
+top: 0;
+background: rgba(245, 243, 239, 0.92);
+backdrop-filter: blur(8px);
+border-bottom: 1px solid var(–rule);
+z-index: 100;
+padding: 12px 0;
+}
+
+nav .container {
+display: flex;
+gap: 28px;
+align-items: center;
+}
+
+nav a {
+font-size: 11px;
+letter-spacing: 0.1em;
+text-transform: uppercase;
+color: var(–mid);
+text-decoration: none;
+transition: color 0.2s;
+}
+
+nav a:hover { color: var(–ink); }
+
+nav .nav-name {
+margin-left: auto;
+color: var(–ink);
+font-weight: 500;
+font-size: 12px;
+}
+
+/* –– SECTION –– */
+section {
+padding: 72px 0;
+border-bottom: 1px solid var(–rule);
+opacity: 0;
+transform: translateY(16px);
+transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+section.visible {
+opacity: 1;
+transform: translateY(0);
+}
+
+.section-label {
+font-size: 10px;
+letter-spacing: 0.2em;
+text-transform: uppercase;
+color: var(–mid);
+margin-bottom: 48px;
+display: flex;
+align-items: center;
+gap: 12px;
+}
+
+.section-label::after {
+content: ‘’;
+flex: 1;
+height: 1px;
+background: var(–rule);
+}
+
+/* –– PROJECT CARD –– */
+.project {
+display: grid;
+grid-template-columns: 1fr 2fr;
+gap: 48px;
+margin-bottom: 64px;
+padding-bottom: 64px;
+border-bottom: 1px solid var(–rule);
+}
+
+.project:last-child {
+margin-bottom: 0;
+padding-bottom: 0;
+border-bottom: none;
+}
+
+.project-meta { padding-top: 4px; }
+
+.project-number {
+font-size: 10px;
+letter-spacing: 0.15em;
+color: var(–mid);
+margin-bottom: 12px;
+}
+
+.project-title {
+font-family: var(–serif);
+font-size: 22px;
+font-weight: 600;
+line-height: 1.2;
+color: var(–ink);
+margin-bottom: 16px;
+}
+
+.tag-list {
+display: flex;
+flex-wrap: wrap;
+gap: 6px;
+margin-top: 20px;
+}
+
+.tag {
+font-size: 10px;
+letter-spacing: 0.08em;
+text-transform: uppercase;
+padding: 3px 9px;
+border: 1px solid var(–rule);
+border-radius: 2px;
+color: var(–mid);
+}
+
+.tag.highlight {
+background: var(–accent-light);
+border-color: transparent;
+color: var(–accent);
+}
+
+.project-body h3 {
+font-family: var(–mono);
+font-size: 10px;
+font-weight: 500;
+letter-spacing: 0.15em;
+text-transform: uppercase;
+color: var(–mid);
+margin-top: 28px;
+margin-bottom: 10px;
+}
+
+.project-body h3:first-child { margin-top: 0; }
+
+.project-body p {
+font-size: 13.5px;
+line-height: 1.75;
+color: #2a2a28;
+margin-bottom: 8px;
+}
+
+.callout {
+margin-top: 24px;
+padding: 16px 20px;
+background: var(–accent-light);
+border-left: 2px solid var(–accent);
+font-size: 12.5px;
+line-height: 1.65;
+color: var(–accent);
+}
+
+.callout strong {
+display: block;
+font-size: 10px;
+letter-spacing: 0.12em;
+text-transform: uppercase;
+margin-bottom: 6px;
+opacity: 0.7;
+}
+
+/* –– SKILLS GRID –– */
+.skills-grid {
+display: grid;
+grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+gap: 1px;
+background: var(–rule);
+border: 1px solid var(–rule);
+}
+
+.skill-cell {
+background: var(–paper);
+padding: 20px 24px;
+}
+
+.skill-cell-label {
+font-size: 10px;
+letter-spacing: 0.12em;
+text-transform: uppercase;
+color: var(–mid);
+margin-bottom: 10px;
+}
+
+.skill-cell p {
+font-size: 12.5px;
+line-height: 1.6;
+color: var(–ink);
+}
+
+/* –– FOOTER –– */
+footer {
+padding: 48px 0;
+opacity: 0;
+animation: fadeUp 0.7s ease 0.3s forwards;
+}
+
+footer .container {
+display: flex;
+justify-content: space-between;
+align-items: center;
+flex-wrap: wrap;
+gap: 16px;
+}
+
+footer p {
+font-size: 12px;
+color: var(–mid);
+}
+
+footer a {
+color: var(–ink);
+text-decoration: none;
+border-bottom: 1px solid var(–rule);
+padding-bottom: 1px;
+transition: border-color 0.2s;
+}
+
+footer a:hover { border-color: var(–ink); }
+
+/* –– ANIMATIONS –– */
+@keyframes fadeUp {
+from { opacity: 0; transform: translateY(12px); }
+to   { opacity: 1; transform: translateY(0); }
+}
+
+/* –– RESPONSIVE –– */
+@media (max-width: 640px) {
+.project { grid-template-columns: 1fr; gap: 24px; }
+h1 { font-size: 38px; }
+.header-meta { flex-direction: column; gap: 8px; }
+}
+</style>
+
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <div class="eyebrow">Systems Portfolio</div>
+    <h1>Zach Urrutia<br><em>IT Systems &amp; Infrastructure</em></h1>
+    <p style="color: var(--mid); font-size: 13px; max-width: 520px; margin-top: 8px; line-height: 1.7;">
+      Five years building and operating IT infrastructure across multi-site, resource-constrained environments. Comfortable being the person who figures it out.
+    </p>
+    <div class="header-meta">
+      <span>Agilyx / Cyclyx</span>
+      <span>Rochester School District</span>
+      <span>AZ-900 Certified</span>
+      <span>AZ-104 In Progress</span>
+    </div>
+  </div>
+</header>
+
+<nav>
+  <div class="container">
+    <a href="#projects">Projects</a>
+    <a href="#rsd">Field Experience</a>
+    <a href="#skills">Skills</a>
+    <span class="nav-name">Zach Urrutia</span>
+  </div>
+</nav>
+
+<!-- PROJECTS -->
+
+<section id="projects">
+  <div class="container">
+    <div class="section-label">Selected Projects — Agilyx / Cyclyx</div>
+
+```
+<!-- Project 1: Stratus -->
+<div class="project">
+  <div class="project-meta">
+    <div class="project-number">01</div>
+    <div class="project-title">Edge Server Backup at a Bandwidth-Constrained Remote Site</div>
+    <div class="tag-list">
+      <span class="tag highlight">Edge Compute</span>
+      <span class="tag highlight">Remote Site</span>
+      <span class="tag">Stratus ztC Edge</span>
+      <span class="tag">Tosibox VPN</span>
+      <span class="tag">OVF / VHD</span>
+    </div>
+  </div>
+  <div class="project-body">
+    <h3>The Problem</h3>
+    <p>A 120GB historian VM running on a Stratus ztC Edge server at a remote industrial site needed a verified backup. The only connectivity was a Tosibox VPN over a cellular hotspot — effectively a few Mbps of usable bandwidth. Any wireless transfer would have taken days and had a high probability of failure mid-stream.</p>
+
+    <h3>Constraints</h3>
+    <p>The Stratus platform does not support saving VM exports to its own local filesystem. A CIFS network share is required as the export destination. Routing that share over the Tosibox link would have placed the bandwidth bottleneck directly in the backup path during the export job — making things worse, not better.</p>
+
+    <h3>Decision Process</h3>
+    <p>Evaluated three paths: a local LAN PC as a CIFS target (fast over LAN, but still requires physical retrieval or secondary transfer), a remote Tosibox-connected PC as the CIFS target (ruled out — worse than doing nothing, as it saturates the constrained link during backup), and USB export directly from the Stratus console to an external drive (viable, avoids the network entirely, requires physical presence at the site).</p>
+    <p>USB export was selected as the lowest-risk, most reliable path. Documented the approach, risks, and workflow for the operations team and management before any work at the site began.</p>
+
+    <div class="callout">
+      <strong>Forward-Deployed Relevance</strong>
+      This is exactly the problem topology that comes up in field-deployed environments: edge hardware, degraded or constrained connectivity, and a need to make sound decisions about data integrity without a datacenter safety net. The ability to reason through it clearly and communicate the tradeoffs to non-technical stakeholders was as important as the technical answer.
+    </div>
+  </div>
+</div>
+
+<!-- Project 2: IAM Migration -->
+<div class="project">
+  <div class="project-meta">
+    <div class="project-number">02</div>
+    <div class="project-title">On-Prem Active Directory to Entra ID Migration</div>
+    <div class="tag-list">
+      <span class="tag highlight">Identity Architecture</span>
+      <span class="tag highlight">Cloud Migration</span>
+      <span class="tag">Entra ID</span>
+      <span class="tag">Intune</span>
+      <span class="tag">Cloud PKI</span>
+      <span class="tag">Conditional Access</span>
+    </div>
+  </div>
+  <div class="project-body">
+    <h3>Scope</h3>
+    <p>Full-scope migration of Agilyx and Cyclyx identity infrastructure from on-premises Active Directory to Microsoft Entra ID. Running as primary technical lead and sole internal IT owner. No large supporting team.</p>
+
+    <h3>What This Actually Involves</h3>
+    <p>Hybrid identity architecture design using Entra Connect. Conditional Access policy design from scratch, replacing legacy GPO-based controls. Cloud PKI deployment to replace on-prem certificate authority. Device management migration to Intune. RADIUS re-platforming to support cloud-native Wi-Fi and VPN authentication. Security group inventory and cloud-readiness classification across the entire AD environment.</p>
+
+    <h3>Project Management Approach</h3>
+    <p>Built the full project structure in Asana across ten workstreams. Developed a PERT-based effort estimation model with optimistic / most likely / pessimistic ranges and statistical confidence intervals to give leadership a defensible timeline. Created both an engineering-facing dependency diagram in PlantUML and a leadership-facing capability matrix for stakeholder communication.</p>
+
+    <div class="callout">
+      <strong>Why This Matters Here</strong>
+      Identity is foundational to any secure kit deployment. The ability to design IAM architecture, not just administer it, and to own the documentation and stakeholder communication alongside the technical work is what separates an operator from an engineer.
+    </div>
+  </div>
+</div>
+
+<!-- Project 3: Azure -->
+<div class="project">
+  <div class="project-meta">
+    <div class="project-number">03</div>
+    <div class="project-title">Azure Cost Governance and Decommission Architecture</div>
+    <div class="tag-list">
+      <span class="tag highlight">Cloud Architecture</span>
+      <span class="tag">Azure</span>
+      <span class="tag">Blob Archive</span>
+      <span class="tag">SQL Elastic Pools</span>
+      <span class="tag">Legal Retention</span>
+    </div>
+  </div>
+  <div class="project-body">
+    <h3>Context</h3>
+    <p>Conducted a structured Azure cost review for a decommissioning scenario. Evaluated managed disks, SQL elastic pools and databases, Syntex document processors, and restore point collections across the environment.</p>
+
+    <h3>Approach</h3>
+    <p>Mapped each resource against legal retention requirements before recommending any deletion. Designed a tiered archival approach using Blob Storage Archive tier as the low-cost long-term hold before permanent removal. Produced a prioritized decommission plan with cost impact and risk flags for each component.</p>
+
+    <div class="callout">
+      <strong>The Takeaway</strong>
+      Cloud cost work that ignores legal and compliance requirements creates bigger problems than it solves. The value here was in asking the right questions before touching anything, not just running the cost analysis.
+    </div>
+  </div>
+</div>
+
+<!-- Project 4: M365 -->
+<div class="project">
+  <div class="project-meta">
+    <div class="project-number">04</div>
+    <div class="project-title">M365 Environment Ownership Across Two Tenants</div>
+    <div class="tag-list">
+      <span class="tag highlight">SaaS Administration</span>
+      <span class="tag">Exchange Online</span>
+      <span class="tag">SharePoint</span>
+      <span class="tag">OneDrive</span>
+      <span class="tag">PowerShell</span>
+    </div>
+  </div>
+  <div class="project-body">
+    <h3>Scope</h3>
+    <p>End-to-end administration of Microsoft 365 across the Agilyx and Cyclyx tenants. Exchange Online management including mailbox permissions, forwarding configuration, and PowerShell-based administration using ExchangeOnlineManagement v3. SharePoint and OneDrive governance. Adobe Creative Cloud enterprise administration. Keeper Enterprise credential management. CATO SASE policy management including troubleshooting a QUIC-blocking rule that was preventing user access to AI tooling.</p>
+
+    <h3>Process Work</h3>
+    <p>Identified a gap in the offboarding process where Adobe users were not being removed from the Admin Console during offboarding, which meant the retention policy never triggered for departing users. Documented the gap, drafted an internal KB article, and opened an Adobe support ticket to resolve a missing UI option that was blocking the correct workflow.</p>
+
+    <div class="callout">
+      <strong>Operational Discipline</strong>
+      Running two tenants as a solo IT resource means building process around the things that are easy to forget. Most of the value here is in the documentation and the gap-finding, not just the administration.
+    </div>
+  </div>
+</div>
+```
+
+  </div>
+</section>
+
+<!-- RSD FIELD EXPERIENCE -->
+
+<section id="rsd">
+  <div class="container">
+    <div class="section-label">Field and Hands-On Experience — Rochester School District</div>
+
+```
+<div class="project">
+  <div class="project-meta">
+    <div class="project-number">05</div>
+    <div class="project-title">Multi-Site Infrastructure Management at Scale</div>
+    <div class="tag-list">
+      <span class="tag highlight">Multi-Site</span>
+      <span class="tag highlight">Hands-On Hardware</span>
+      <span class="tag">Windows Server</span>
+      <span class="tag">AD / DNS / DHCP</span>
+      <span class="tag">SCCM</span>
+      <span class="tag">4,000+ Endpoints</span>
+    </div>
+  </div>
+  <div class="project-body">
+    <h3>Environment</h3>
+    <p>IT support and infrastructure management across eight school buildings in a hub-and-spoke network topology. Roughly 4,000 Windows endpoints, ranging from classroom workstations to administrative machines and shared lab devices. Responsible for physical provisioning, imaging, and deployment alongside ongoing support.</p>
+
+    <h3>Infrastructure Ownership</h3>
+    <p>Maintained Windows Server infrastructure across all sites: Active Directory, DNS, DHCP, file and print services. Standardized endpoint builds district-wide using SCCM and Group Policy, which reduced imaging time and eliminated recurring configuration drift between sites.</p>
+
+    <h3>Automation</h3>
+    <p>Wrote a PowerShell onboarding script to automate account creation for new staff. Cut provisioning time by roughly 40% and eliminated a category of recurring errors that came from manual steps being missed during high-volume onboarding periods at the start of each school year.</p>
+
+    <div class="callout">
+      <strong>Relevant to Forward-Deployed Environments</strong>
+      Managing infrastructure across eight physically separate sites with limited staff is operationally similar to supporting distributed kit deployments. You learn to build systems that work without someone standing next to the hardware, to document clearly enough that someone else can follow it, and to treat physical access as a resource to be rationed.
+    </div>
+  </div>
+</div>
+```
+
+  </div>
+</section>
+
+<!-- SKILLS -->
+
+<section id="skills">
+  <div class="container">
+    <div class="section-label">Technical Competencies</div>
+
+```
+<div class="skills-grid">
+  <div class="skill-cell">
+    <div class="skill-cell-label">Identity &amp; Access</div>
+    <p>Entra ID, Entra Connect, Active Directory, Conditional Access, Cloud PKI, Intune, Group Policy, RADIUS, hybrid AD architecture</p>
+  </div>
+  <div class="skill-cell">
+    <div class="skill-cell-label">Cloud Infrastructure</div>
+    <p>Azure IaaS, VMs, VNets, Blob Storage, SQL elastic pools, Azure Backup, Site Recovery, zone-redundant storage, hybrid connectivity</p>
+  </div>
+  <div class="skill-cell">
+    <div class="skill-cell-label">Networking &amp; Security</div>
+    <p>CATO SASE, Fortigate, Ubiquiti, Tosibox VPN, firewall policy, endpoint security, Pi-hole DNS, site-to-site VPN</p>
+  </div>
+  <div class="skill-cell">
+    <div class="skill-cell-label">Edge &amp; Server</div>
+    <p>Stratus ztC Edge, Windows Server (AD, DNS, DHCP, file/print), multi-site infrastructure, physical provisioning and imaging, SCCM</p>
+  </div>
+  <div class="skill-cell">
+    <div class="skill-cell-label">Scripting &amp; Automation</div>
+    <p>PowerShell for system administration, Exchange Online management, backup orchestration, compliance automation, credential lifecycle</p>
+  </div>
+  <div class="skill-cell">
+    <div class="skill-cell-label">SaaS &amp; Platforms</div>
+    <p>Microsoft 365 (Exchange, SharePoint, OneDrive, Teams), Adobe Creative Cloud enterprise, Keeper Enterprise, Autodesk Vault Professional</p>
+  </div>
+  <div class="skill-cell">
+    <div class="skill-cell-label">Documentation &amp; PM</div>
+    <p>Asana WBS, PERT estimation, PlantUML architecture diagrams, SOP authoring, stakeholder reporting, gap analysis</p>
+  </div>
+  <div class="skill-cell">
+    <div class="skill-cell-label">Certifications</div>
+    <p>AZ-900: Azure Fundamentals (2021)<br>AZ-104: Azure Administrator (In Progress)</p>
+  </div>
+</div>
+```
+
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <p>Zach Urrutia &mdash; IT Systems &amp; Infrastructure</p>
+    <p>Built for the Orb application &mdash; <a href="mailto:zach.urrutia@email.com">zach.urrutia@email.com</a></p>
+  </div>
+</footer>
+
+<script>
+  // Scroll-triggered section reveals
+  const sections = document.querySelectorAll('section');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.08 });
+
+  sections.forEach(s => observer.observe(s));
+</script>
+
+</body>
+</html>
